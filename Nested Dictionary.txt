@@ -1,0 +1,36 @@
+We have a nested object. We would like a function where you pass in the object and a key and
+get back the value.
+The choice of language and implementation is up to you.
+Example Inputs
+object = {“a”:{“b”:{“c”:”d”}}} key
+= a/b/c
+object = {“x”:{“y”:{“z”:”a”}}} key
+= x/y/z
+value = a
+
+===============Solution===================
+def func_nesting(obj, key):
+    keys = key.split('/')
+    object = obj
+    for k in keys:
+        if k in object:
+            object = object[k]   #If the key exists in the current object, we update object to be the value associated with that key.
+Otherwise, we return None.
+        else:
+            return None
+    return object
+    
+object1 = {"a": {"b": {"c": "d"}}}
+key1 = "a/b/c"
+value1 = func_nesting(object1, key1)
+print("Value for key: ", value1)
+
+object2 = {"x": {"y": {"z": "a"}}}
+key2 = "x/y/z"
+value2 = func_nesting(object2, key2)
+print("Value for key: ", value2)
+
+===========================================
+
+#object = {"a": {"b": {"c": "d"}}} : To access the value associated with the key "c", you can use object["a"]["b"]["c"]. In this case, object["a"] gives you the inner dictionary, then ["b"] gives you the next inner dictionary, and finally ["c"] retrieves the value "d".
+In summary, object1 represents a nested dictionary where "a" contains another dictionary, which in turn contains "b" with an innermost key "c" having the value "d"
