@@ -1,0 +1,10 @@
+We need to write code that will query the meta data of an instance within Azure and provide a json formatted output.
+
+
+Resources
+| where type == 'microsoft.compute/virtualmachines'
+| extend
+	OSType = tostring(properties.storageProfile.osDisk.osType),
+	VMSize = tostring(properties.hardwareProfile.vmSize)
+| project name, subscrptionId, location, OSType, VMSize
+| summarize make_list(pack_all())
